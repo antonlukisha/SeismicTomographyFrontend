@@ -1,0 +1,46 @@
+{
+  "name": "viewer",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@mui/joy": "^5.0.0-beta.24",
+    "@mui/x-date-pickers": "^6.19.2",
+    "@pbe/react-yandex-maps": "^1.2.5",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "axios": "^1.6.7",
+    "dayjs": "^1.11.10",
+    "echarts": "^5.4.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.6.0",
+    "react-router-dom": "^6.21.3",
+    "vite": "^5.0.12",
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.5.0"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
