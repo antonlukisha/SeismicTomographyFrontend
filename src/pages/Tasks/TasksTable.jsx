@@ -134,7 +134,7 @@ export const TasksTable = React.memo(() => {
                         </tbody>
                     </Table>
                 </Sheet>
-            }<div></div>
+            }
         </Box >
     )
 })
