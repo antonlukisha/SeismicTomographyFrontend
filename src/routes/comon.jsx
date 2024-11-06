@@ -18,6 +18,11 @@ export const commonRoutes = [
         path: '/register',  
         element: <Register /> 
     },
+    { path: 'protected', element: (
+        <ProtectedRoute>
+            <ProtectedPage />
+        </ProtectedRoute>
+    )},
     {
         path: '/',
         element: <MainLayout />,
@@ -26,11 +31,6 @@ export const commonRoutes = [
             { path: 'prepare/*', element: <PrepareData /> },
             { path: 'events/*', element: <Events /> },
             { path: 'result/*', element: <Result /> },
-            { path: 'protected', element: (
-                <ProtectedRoute>
-                    <ProtectedPage />
-                </ProtectedRoute>
-            )}
         ]
     }
 ]
