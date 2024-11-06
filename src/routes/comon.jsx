@@ -6,12 +6,17 @@ import Result from '../pages/Result/Result';
 import { MainLayout } from '../components/Layouts/MainLayout';
 import Tasks from '../pages/Tasks/Tasks';
 import Login from '../pages/Login/Login';
+import Register from '../pages/Register/Register';
 import ProtectedRoute from './ProtectedRoute';
 import ProtectedPage from '../pages/Protected/ProtectedPage';
 
 export const commonRoutes = [
     { path: '/login',
          element: <Login /> 
+    },
+    { 
+        path: '/register',  
+        element: <Register /> 
     },
     {
         path: '/',
