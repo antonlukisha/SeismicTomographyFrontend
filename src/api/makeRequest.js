@@ -6,8 +6,8 @@ export default async function makeRequest(
     const hasBody = !["GET", "HEAD"].includes(method);
     const body = hasBody ? JSON.stringify(data) : undefined;
     const headers = { "accept": "application/json" }
-    const url = import.meta.env.VITE_API_BASE_URL + service;
-    const response = await fetch(url, { method, headers, body });
+    const url = service;
+    const response = await fetch('127.0.0.1:8080' + service, { method, headers, body });
 
     return await toApiResponse(response);
 }

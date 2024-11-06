@@ -10,7 +10,9 @@ import ProtectedRoute from './ProtectedRoute';
 import ProtectedPage from '../pages/Protected/ProtectedPage';
 
 export const commonRoutes = [
-    { path: '/login', element: <Login /> },
+    { path: '/login',
+         element: <Login /> 
+    },
     {
         path: '/',
         element: <MainLayout />,
@@ -19,7 +21,6 @@ export const commonRoutes = [
             { path: 'prepare/*', element: <PrepareData /> },
             { path: 'events/*', element: <Events /> },
             { path: 'result/*', element: <Result /> },
-            // { path: 'login', element: <Login />},
             { path: 'protected', element: (
                 <ProtectedRoute>
                     <ProtectedPage />
