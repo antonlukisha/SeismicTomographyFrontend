@@ -52,6 +52,15 @@ const LoginForm = () => {
       <InputField label="Password" value={password} onChange={setPassword} type="password" />
       <LoginButton loading={loading} />
       {error && <ErrorMessage message={error} />}
+
+      <div className="mt-3 text-center">
+        <p className="mb-0">
+          Don’t have an account?{' '}
+          <a href="/register" className="text-primary">
+            Register here
+          </a>.
+        </p>
+      </div>
     </form>
   );
 };

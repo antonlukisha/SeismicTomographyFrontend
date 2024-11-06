@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -6,6 +7,8 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  const navigate = useNavigate(); // Хук для редиректа
 
   const isPasswordStrong = (password) => {
     const hasUpperCase = /[A-Z]/.test(password);
@@ -48,6 +51,11 @@ const RegisterForm = () => {
 
       if (response.status === 201) {
         setSuccessMessage("User registered successfully!");
+        
+        // Добавление редиректа на страницу логина
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000); // редирект через 2 секунды
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.error.content || "Registration failed");
