@@ -3,7 +3,7 @@ import LoginForm from '../../components/Login/LoginForm';
 
 const Login = () => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+    <div className="d-flex justify-content-center align-items-center vh-100">
       <LoginForm />
     </div>
   );

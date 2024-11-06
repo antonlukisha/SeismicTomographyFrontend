@@ -46,7 +46,8 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm" style={{ width: '100%', maxWidth: '400px' }}>
+      <h2 className="mb-4 text-center">Login</h2>
       <InputField label="Username" value={username} onChange={setUsername} type="text" />
       <InputField label="Password" value={password} onChange={setPassword} type="password" />
       <LoginButton loading={loading} />
