@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../api/user/loginUser';
-import InputField from './InputField';
-import ErrorMessage from './ErrorMessage';
+import InputField from '../InputField';
+import Message from '../Message';
 import LoginButton from './LoginButton';
 
 const LoginForm = () => {
@@ -26,22 +26,25 @@ const LoginForm = () => {
     event.preventDefault();
     if (!validateForm()) return;
 
+    const user = {
+      username,
+      password,
+    };
+
     setLoading(true);
     try {
-      const response = await loginUser(username, password);
-      setLoading(false);
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('token', data.access_token);
-        navigate('/protected');
-      } else {
-        const errorData = await response.json();
-        setError(errorData.detail || 'Authentication failed!');
-      }
+      console.log(user);
+      const response = await loginUser(user);
+      //const data = await response.json();
+      //localStorage.setItem('token', data.access_token);
+      // Добавление редиректа на страницу
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
     } catch (error) {
-      setLoading(false);
       setError('An error occurred. Please try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,8 +54,7 @@ const LoginForm = () => {
       <InputField label="Username" value={username} onChange={setUsername} type="text" />
       <InputField label="Password" value={password} onChange={setPassword} type="password" />
       <LoginButton loading={loading} />
-      {error && <ErrorMessage message={error} />}
-
+      {error && <Message message={error} type="danger" />}
       <div className="mt-3 text-center">
         <p className="mb-0">
           Don’t have an account?{' '}

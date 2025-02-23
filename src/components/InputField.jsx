@@ -8,6 +8,7 @@ const InputField = ({ label, value, onChange, type }) => (
       className="form-control"
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      required
     />
   </div>
 );

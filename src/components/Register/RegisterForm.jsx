@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isPasswordStrong } from '../../utils/validators'
+import { registerUser } from '../../api/user/registerUser';
+import Message from '../Message';
+import InputField from '../InputField';
+import ShowPasswordButton from '../ShowPasswordButton';
+import RegisterButton from './RegisterButton';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -7,20 +13,16 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const navigate = useNavigate(); // Хук для редиректа
-
-  const isPasswordStrong = (password) => {
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumber = /\d/.test(password);
-    return password.length >= 8 && hasUpperCase && hasLowerCase && hasNumber;
-  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setErrorMessage('');
     setSuccessMessage('');
+    setLoading(true);
 
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match");
@@ -41,71 +43,35 @@ const RegisterForm = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/api/users/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser),
-      });
+        const response = await registerUser(newUser);
+        console.log(response);
+        console.log(response);
 
-      if (response.status === 201) {
-        setSuccessMessage("User registered successfully!");
-        
+        // Поскольку мы ожидаем успешный ответ с кодом 201, проверяем это
+        setSuccessMessage("Registration successful!");
+
         // Добавление редиректа на страницу логина
         setTimeout(() => {
           navigate('/login');
         }, 2000); // редирект через 2 секунды
-      } else {
-        const errorData = await response.json();
-        setErrorMessage(errorData.error.content || "Registration failed");
-      }
     } catch (error) {
-      setErrorMessage("An error occurred. Please try again later.");
+        setErrorMessage(error.message || "An error occurred. Please try again later.");
+        console.error(errorMessage);
+    } finally {
+        setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleRegister} className="w-50 mx-auto mt-5">
-      <div className="mb-3">
-        <label htmlFor="username" className="form-label">Username:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          className="form-control"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="password" className="form-label">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className="form-control"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          className="form-control"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </div>
-      {errorMessage && <div className="alert alert-danger" role="alert">{errorMessage}</div>}
-      {successMessage && <div className="alert alert-success" role="alert">{successMessage}</div>}
-      <button type="submit" className="btn btn-primary">Register</button>
+    <form onSubmit={handleRegister} className="p-4 border rounded shadow-sm" style={{ width: '100%', maxWidth: '400px' }}>
+      <h2 className="mb-4 text-center">Registration</h2>
+      <InputField label="Username" value={username} onChange={setUsername} type="text" />
+      <InputField label="Password" value={password} onChange={setPassword} type={isVisible ? 'text' : 'password'} />
+      <InputField label="Confirm Password" value={confirmPassword} onChange={setConfirmPassword} type="password" />
+      <ShowPasswordButton label="Show password" isVisible={isVisible} setIsVisible={setIsVisible} />
+      <Message message={errorMessage} type="danger" />
+      <Message message={successMessage} type="success" />
+      <RegisterButton loading={loading} />
     </form>
   );
 };
