@@ -25,12 +25,12 @@ const RegisterForm = () => {
     setLoading(true);
 
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
+      setErrorMessage("Пароли не совпадают");
       return;
     }
 
     if (!isPasswordStrong(password)) {
-      setErrorMessage("Password must be at least 8 characters long and include uppercase, lowercase, and a number");
+      setErrorMessage("Пароль должен иметь не менее 8 символов, включать в себя нижний и верхний регистр, а также цифры");
       return;
     }
 
@@ -48,14 +48,14 @@ const RegisterForm = () => {
         console.log(response);
 
         // Поскольку мы ожидаем успешный ответ с кодом 201, проверяем это
-        setSuccessMessage("Registration successful!");
+        setSuccessMessage("Регистрация прошла успешно!");
 
         // Добавление редиректа на страницу логина
         setTimeout(() => {
           navigate('/login');
         }, 2000); // редирект через 2 секунды
     } catch (error) {
-        setErrorMessage(error.message || "An error occurred. Please try again later.");
+        setErrorMessage(error.message || "Произошла ошибка. Пожалуйста, повторите попытку позже.");
         console.error(errorMessage);
     } finally {
         setLoading(false);
@@ -64,11 +64,11 @@ const RegisterForm = () => {
 
   return (
     <form onSubmit={handleRegister} className="p-4 border rounded shadow-sm" style={{ width: '100%', maxWidth: '400px' }}>
-      <h2 className="mb-4 text-center">Registration</h2>
-      <InputField label="Username" value={username} onChange={setUsername} type="text" />
-      <InputField label="Password" value={password} onChange={setPassword} type={isVisible ? 'text' : 'password'} />
-      <InputField label="Confirm Password" value={confirmPassword} onChange={setConfirmPassword} type="password" />
-      <ShowPasswordButton label="Show password" isVisible={isVisible} setIsVisible={setIsVisible} />
+      <h2 className="mb-4 text-center">Регистрация</h2>
+      <InputField label="Имя пользователя" value={username} onChange={setUsername} type="text" />
+      <InputField label="Пароль" value={password} onChange={setPassword} type={isVisible ? 'text' : 'password'} />
+      <InputField label="Подтвердите пароль" value={confirmPassword} onChange={setConfirmPassword} type="password" />
+      <ShowPasswordButton label="Показать пароль" isVisible={isVisible} setIsVisible={setIsVisible} />
       <Message message={errorMessage} type="danger" />
       <Message message={successMessage} type="success" />
       <RegisterButton loading={loading} />

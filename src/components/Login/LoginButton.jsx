@@ -6,7 +6,7 @@ const LoginButton = ({ loading }) => (
     disabled={loading}
     className="btn btn-primary w-100 mt-3"
   >
-    {loading ? 'Logging in...' : 'Login'}
+    {loading ? 'Вход...' : 'Войти'}
   </button>
 );
 

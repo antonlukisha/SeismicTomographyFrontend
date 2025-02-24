@@ -11,13 +11,13 @@ export const registerUser = async (dto) => {
    if (response.status == 201) {
      return response.data;
    } else {
-     throw new Error("Registration failed");
+     throw new Error("Не удалось выполнить регистрацию");
    }
   } catch (error) {
     if (error.response && error.response.status === 409) {
-      throw new Error("Username already exists. Please try again with a different name.");
+      throw new Error("Имя пользователя уже существует. Пожалуйста, повторите попытку под другим именем.");
     } else {
-      throw new Error(error.response?.data?.message || 'Registration failed');
+      throw new Error(error.response?.data?.message || 'Не удалось выполнить регистрацию');
     }
   }
 };

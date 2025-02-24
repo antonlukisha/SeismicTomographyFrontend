@@ -15,7 +15,7 @@ const LoginForm = () => {
 
   const validateForm = () => {
     if (!username || !password) {
-      setError('Username and password are required');
+      setError('Требуются имя пользователя и пароль');
       return false;
     }
     setError('');
@@ -42,7 +42,7 @@ const LoginForm = () => {
         navigate('/');
       }, 1000);
     } catch (error) {
-      setError('An error occurred. Please try again later.');
+      setError('Произошла ошибка. Пожалуйста, повторите попытку позже.');
     } finally {
       setLoading(false);
     }
@@ -50,16 +50,16 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm" style={{ width: '100%', maxWidth: '400px' }}>
-      <h2 className="mb-4 text-center">Login</h2>
-      <InputField label="Username" value={username} onChange={setUsername} type="text" />
-      <InputField label="Password" value={password} onChange={setPassword} type="password" />
+      <h2 className="mb-4 text-center">Вход</h2>
+      <InputField label="Имя пользователя" value={username} onChange={setUsername} type="text" />
+      <InputField label="Пароль" value={password} onChange={setPassword} type="password" />
       <LoginButton loading={loading} />
       {error && <Message message={error} type="danger" />}
       <div className="mt-3 text-center">
-        <p className="mb-0">
-          Don’t have an account?{' '}
+        <p className="mb-0" style={{ fontSize: '0.9rem' }}>
+          У вас нет учетной записи?{' '}
           <a href="/register" className="text-primary">
-            Register here
+            Зарегистрируйтесь здесь
           </a>.
         </p>
       </div>

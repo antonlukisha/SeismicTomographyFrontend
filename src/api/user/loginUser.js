@@ -14,9 +14,9 @@ export const loginUser = async (user) => {
       if (response.status == 200) {
         return response.data;
       } else {
-        throw new Error("Authorisation failed");
+        throw new Error("Не удалось выполнить авторизацию");
       }
     } catch (error) {
-      throw new Error(error.response?.data?.message || 'Authorisation failed');
+      throw new Error(error.response?.data?.message || 'Не удалось выполнить авторизацию');
     }
 };

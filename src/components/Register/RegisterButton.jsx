@@ -6,7 +6,7 @@ const RegisterButton = ({ loading }) => (
     disabled={loading}
     className="btn btn-primary w-100 mt-3"
   >
-    {loading ? 'Signing in...' : 'Sign in'}
+    {loading ? 'Регистрация...' : 'Зарегистрироваться'}
   </button>
 );
 
