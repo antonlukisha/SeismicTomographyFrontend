@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isPasswordStrong } from '../../utils/validators'
 import { registerUser } from '../../api/user/registerUser';
@@ -22,8 +22,6 @@ const RegisterForm = () => {
     e.preventDefault();
     setErrorMessage('');
     setSuccessMessage('');
-    setLoading(true);
-
     if (password !== confirmPassword) {
       setErrorMessage("Пароли не совпадают");
       return;
@@ -42,6 +40,7 @@ const RegisterForm = () => {
       last_login_date: new Date().toISOString(),
     };
 
+    setLoading(true);
     try {
         const response = await registerUser(newUser);
         console.log(response);

@@ -4,6 +4,7 @@ const Message = ({ message, type }) => {
   const [showMessage, setShowMessage] = useState(true);
 
   useEffect(() => {
+    console.log(message);
     if (message) {
       setShowMessage(true);
       const timer = setTimeout(() => setShowMessage(false), 3000);

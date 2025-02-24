@@ -4,12 +4,14 @@ import { loginUser } from '../../api/user/loginUser';
 import InputField from '../InputField';
 import Message from '../Message';
 import LoginButton from './LoginButton';
+import ShowPasswordButton from '../ShowPasswordButton';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const navigate = useNavigate();
 
@@ -52,7 +54,8 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm" style={{ width: '100%', maxWidth: '400px' }}>
       <h2 className="mb-4 text-center">Вход</h2>
       <InputField label="Имя пользователя" value={username} onChange={setUsername} type="text" />
-      <InputField label="Пароль" value={password} onChange={setPassword} type="password" />
+      <InputField label="Пароль" value={password} onChange={setPassword} type={isVisible ? 'text' : 'password'} />
+      <ShowPasswordButton label="Показать пароль" isVisible={isVisible} setIsVisible={setIsVisible} />
       <LoginButton loading={loading} />
       {error && <Message message={error} type="danger" />}
       <div className="mt-3 text-center">
