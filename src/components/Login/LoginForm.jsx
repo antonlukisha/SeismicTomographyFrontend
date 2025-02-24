@@ -44,7 +44,7 @@ const LoginForm = () => {
         navigate('/');
       }, 1000);
     } catch (error) {
-      setError('Произошла ошибка. Пожалуйста, повторите попытку позже.');
+      setError('Неверный логин или пароль. Пожалуйста, повторите попытку.');
     } finally {
       setLoading(false);
     }
