@@ -6,7 +6,7 @@ export const loginUser = async (user) => {
       dto.append('username', user.username);
       dto.append('password', user.password);
 
-      const response = await axios.post('http://localhost:8000/api/users/token', dto, {
+      const response = await axios.post('http://0.0.0.0:4020/api/users/token', dto, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
