@@ -8,6 +8,4 @@ RUN npm install
 
 COPY . ./
 
-EXPOSE 4030
-
-CMD ["npx", "vite"]
+CMD ["npx", "vite", "--host", "84.237.52.214", "--port", "4030"]
