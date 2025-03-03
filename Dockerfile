@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . ./
 
-EXPOSE 5174
+EXPOSE 4030
 
 CMD ["npx", "vite"]
