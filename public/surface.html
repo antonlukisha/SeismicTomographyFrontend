@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>VTK.js Viewer</title>
+    <script src="https://unpkg.com/vtk.js"></script>
+</head>
+<body>
+    <div id="container" style="width: 100vw; height: 100vh;"></div>
+    <script>
+        const fullScreenRenderer = vtk.Rendering.Misc.vtkFullScreenRenderWindow.newInstance();
+        const renderer = fullScreenRenderer.getRenderer();
+        const renderWindow = fullScreenRenderer.getRenderWindow();
+
+        // Загрузка файла VTK
+        vtk.IO.Core.vtkHttpDataSetReader.newInstance({ fetchGzip: true })
+            .setUrl("scene.vtksz")
+            .then((reader) => {
+                reader.loadData().then(() => {
+                    const mapper = vtk.Rendering.Core.vtkMapper.newInstance();
+                    const actor = vtk.Rendering.Core.vtkActor.newInstance();
+                    mapper.setInputConnection(reader.getOutputPort());
+                    actor.setMapper(mapper);
+                    renderer.addActor(actor);
+                    renderer.resetCamera();
+                    renderWindow.render();
+
+                    // Анимация: вращаем объект
+                    function animate() {
+                        actor.rotateY(1);
+                        renderWindow.render();
+                        requestAnimationFrame(animate);
+                    }
+                    animate();
+                });
+            });
+    </script>
+</body>
+</html>

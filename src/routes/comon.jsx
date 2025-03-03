@@ -7,18 +7,29 @@ import { MainLayout } from '../components/Layouts/MainLayout';
 import Tasks from '../pages/Tasks/Tasks';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
+import PyVista from '../pages/TestPlots/PyVista';
+import Plotly from '../pages/TestPlots/Plotly';
 import ProtectedRoute from './ProtectedRoute';
 import ProtectedPage from '../pages/Protected/ProtectedPage';
 
 export const commonRoutes = [
-    { path: '/login',
-         element: <Login /> 
+    {
+         path: '/login',
+         element: <Login />
     },
-    { 
-        path: '/register',  
-        element: <Register /> 
+    {
+        path: '/register',
+        element: <Register />
     },
-    { path: 'protected', element: (
+    {
+        path: '/pyvista',
+        element: <PyVista />
+    },
+    {
+        path: '/plotly',
+        element: <Plotly />
+    },
+    { path: '/protected', element: (
         <ProtectedRoute>
             <ProtectedPage />
         </ProtectedRoute>

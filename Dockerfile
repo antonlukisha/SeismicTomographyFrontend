@@ -1,24 +1,13 @@
-FROM node:18.17.0-alpine as build
-
-ARG MODE=production
-ARG VITE_API_URL
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
-COPY . /app
-
-RUN echo "VITE_API_URL=${VITE_API_URL}" > /app/.env
+COPY package*.json ./
 
 RUN npm install
 
-ENV NODE_ENV $MODE
-RUN npm run build
+COPY . ./
 
+EXPOSE 5174
 
-FROM nginx:1.25.2-alpine3.18
-
-COPY --from=build /app/dist /opt/site
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npx", "vite"]

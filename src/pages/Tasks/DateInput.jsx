@@ -1,5 +1,6 @@
 import { Box } from '@mui/joy'
-import { DateTimePicker, LocalizationProvider, ruRU } from '@mui/x-date-pickers'
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { ruRU } from '@mui/x-date-pickers/locales';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import React from 'react'
 
