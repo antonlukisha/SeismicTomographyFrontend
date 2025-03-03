@@ -2,6 +2,7 @@
   "name": "viewer",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://84.237.52.214:4030/",
   "dependencies": {
     "@mui/joy": "^5.0.0-beta.51",
     "@mui/x-date-pickers": "^7.27.1",
