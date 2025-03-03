@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://84.237.52.214:4020";
+
 export const registerUser = async (dto) => {
   try {
-    const response = await axios.post('http://0.0.0.0:4020/api/users/register', dto, {
+    const response = await axios.post(`${API_BASE_URL}/api/users/register`, dto, {
       headers: {
         'Content-Type': 'application/json',
      },
